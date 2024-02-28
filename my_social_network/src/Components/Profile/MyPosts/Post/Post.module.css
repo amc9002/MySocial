@@ -1,0 +1,11 @@
+.item {
+  color: green;
+}
+
+img {
+  width: 50px;
+}
+
+.item span {
+  text-align: right;
+}

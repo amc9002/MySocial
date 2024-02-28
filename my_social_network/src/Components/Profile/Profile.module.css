@@ -1,0 +1,7 @@
+.content {
+    grid-area: c;
+  }
+
+  .coverPic {
+    width: 500px;
+  }
