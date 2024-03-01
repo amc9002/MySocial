@@ -1,16 +1,16 @@
 .nav {
-    grid-area: n;
-    grid-area: n;
-    background-color: cadetblue;
-    padding: 20px;
-  }
-  
-  a {
-    color: white;
-    font-size: larger;
-    margin: 20px;
-  }
-  
-  .item a.active {
-    color: gold;
-  }
+  grid-area: n;
+  grid-area: n;
+  background-color: cadetblue;
+  padding: 20px;
+  font-size: larger;
+}
+
+.pending {
+  color: white;
+  margin-left: 20px;
+}
+
+.active {
+  color: gold;
+}

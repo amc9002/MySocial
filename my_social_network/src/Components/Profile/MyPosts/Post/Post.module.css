@@ -2,10 +2,10 @@
   color: green;
 }
 
-img {
-  width: 50px;
+.item img {
+  border-radius: 50%;
 }
 
-.item span {
-  text-align: right;
+img {
+  width: 50px;
 }
