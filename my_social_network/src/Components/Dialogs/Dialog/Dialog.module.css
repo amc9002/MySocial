@@ -1,7 +1,23 @@
 .dialog {
-
+    display: flex;
+    height: 50px;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+    border: solid rgb(151, 14, 189) 3px;
+    align-items: flex-end;
 }
 
-.active {
-    color: gold;
+.dialog img {
+    width: 40px;
+    border-radius: 20px;
+}
+
+.dialog a.active {
+    color: red;
+}
+
+span {
+    font-size: 20px;
+    margin-left: 10px;
 }

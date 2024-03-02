@@ -1,35 +1,46 @@
 import s from "./Dialogs.module.css"
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
+import React from "react";
 
 function Dialogs(props) {
+    const dialogsDataToJsx = props.dialogsPage.dialogsData.map(d =>
+        <Dialog key={d.id} id={d.id} name={d.name} ava={d.ava} />
+    );
+    const messagesDataToJsx = props.dialogsPage.messagesData.map(m =>
+        <Message key={m.id} message={m.message} />
+    );
 
-    let dialogsData = [
-        {id: 1, name: 'Andris'},
-        {id: 2, name: 'Mscislau'},
-        {id: 3, name: 'Anela'},
-        {id: 4, name: 'Kandrat'},
-        {id: 5, name: 'Jakub'}
-    ];
-    let dialogsDataToJsx = dialogsData.map(d => <Dialog key={d.id} id={d.id} name={d.name} />);
+    let newMessage = React.createRef();
 
-    let messageData = [
-        {id: 1, message: 'message 1'},
-        {id: 2, message: "message 2"},
-        {id: 3, message: 'message 3'}
-    ];
-    let messageDataToJsx = messageData.map(m => <Message key={m.id} message={m.message} />);
+    function addNewMessage () {
+        const text = newMessage.current.value;
+        newMessage.current.value = '';
+        alert(`New message: ${text}`);
+    }
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <div><h3>Dialogs</h3></div>
-                {dialogsDataToJsx}
+                <div className={s.title}><h3>Dialogs</h3></div>
+                <div>
+                    {dialogsDataToJsx}
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <textarea ref={newMessage}></textarea>
+                    </div>
+                    <div>
+                        <button onClick={addNewMessage}>Add message</button>
+                    </div>
+                </div>
+                <div className={s.messages}>
+                    {messagesDataToJsx}
+                </div>
             </div>
 
-            <div className={s.messages}>
-                {messageDataToJsx}
-            </div>
         </div>
     );
 }

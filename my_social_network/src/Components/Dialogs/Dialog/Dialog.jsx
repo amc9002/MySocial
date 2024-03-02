@@ -5,7 +5,7 @@ function Dialog(props) {
     const path = '/dialogs/' + props.id;
     return (
         <div className={`${s.dialog} ${s.active}`}>
-            <NavLink to={path} >{props.name}</NavLink>
+            <NavLink to={path} ><img src={props.ava} alt='ava'/><span>{props.name}</span></NavLink>
         </div>
     );
 }

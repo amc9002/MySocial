@@ -1,10 +1,17 @@
 .header {
-    grid-area: h;
-    background-color: aquamarine;
-  }
-  
-  .header img {
-    box-sizing: border-box;
-    margin: 5px;
-    width: 70px;
-  }
+  display: flex;
+  grid-area: h;
+  background-color: aquamarine;
+}
+
+.header img {
+  box-sizing: border-box;
+  margin: 5px;
+  width: 70px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  color: cadetblue;
+}

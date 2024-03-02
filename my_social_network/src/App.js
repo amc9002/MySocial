@@ -11,16 +11,18 @@ import Friends from './Components/Friends/Friends';
 import Users from './Components/Users/Users';
 import Settings from './Components/Settings/Settings';
 
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <Navbar />
+        <Navbar navData={props.state.sidebar.navData} />
         <div className='app-wrapper-content'>
           <Routes>
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/dialogs/*' element={<Dialogs />} />
+            <Route path='/profile' element={<Profile
+              profilePage={props.state.profilePage} />} />
+            <Route path='/dialogs/*' element={<Dialogs
+              dialogsPage={props.state.dialogsPage} />} />
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />
             <Route path='/friends' element={<Friends />} />

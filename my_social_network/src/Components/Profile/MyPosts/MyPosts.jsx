@@ -1,14 +1,19 @@
+import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post'
 
-function MyPosts() {
-let postsData = [
-  {id: 1, text: "Hello!", likesCount: 10},
-  {id: 2, text: "Post 1", likesCount: 20},
-  {id: 3, text: "Post 2", likesCount: 30},
-  {id: 4, text: "Post 3", likesCount: 40}
-];
-let postsDataToJsx = postsData.map(p => <Post key={p.id} text={p.text} likesCount={p.likesCount}/>);
+function MyPosts(props) {
+  let postsDataToJsx = props.postsData.map(p =>
+    <Post key={p.id} text={p.text} likesCount={p.likesCount} />
+  );
+
+  let newPostElement = React.createRef();
+
+  function addPost() {
+    let text = newPostElement.current.value;
+    newPostElement.current.value = '';
+    alert(text);
+  }
 
   return (
     <div>
@@ -18,10 +23,10 @@ let postsDataToJsx = postsData.map(p => <Post key={p.id} text={p.text} likesCoun
       <div>New post:</div>
       <div>
         <div>
-          <textarea></textarea>
+          <textarea ref={newPostElement}></textarea>
         </div>
         <div>
-          <button>Add post</button>
+          <button onClick={addPost}>Add post</button>
         </div>
       </div>
       <div className={s.posts}>
