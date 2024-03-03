@@ -5,7 +5,7 @@ import React from "react";
 
 function Dialogs(props) {
     const dialogsDataToJsx = props.dialogsPage.dialogsData.map(d =>
-        <Dialog key={d.id} id={d.id} name={d.name} ava={d.ava} />
+        <Dialog key={d.id} id={d.id} name={d.name} ava={d.ava} isActive={d.isActive}/>
     );
     const messagesDataToJsx = props.dialogsPage.messagesData.map(m =>
         <Message key={m.id} message={m.message} />

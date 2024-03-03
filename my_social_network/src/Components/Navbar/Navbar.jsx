@@ -8,8 +8,8 @@ function getClassName(isActive) {
 
 function Navbar(props) {
   const navDataToJsx = props.navData.map(n =>
-  <div>
-    <NavLink to={n.url} key={n.id} className={getClassName(n.isActive)}>{n.title}</NavLink>
+  <div key={n.id} >
+    <NavLink to={n.url} className={getClassName(n.isActive)}>{n.title}</NavLink>
   </div>
   );
   return (

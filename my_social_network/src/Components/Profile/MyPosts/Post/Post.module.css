@@ -1,4 +1,5 @@
 .item {
+  font-size: large;
   color: green;
 }
 
@@ -8,4 +9,8 @@
 
 img {
   width: 50px;
+}
+
+.likeDiv {
+  font-size: small;
 }

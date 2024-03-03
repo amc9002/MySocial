@@ -3,7 +3,7 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post'
 
 function MyPosts(props) {
-  let postsDataToJsx = props.postsData.map(p =>
+  let postsDataToJsx = props.profilePage.postsData.map(p =>
     <Post key={p.id} text={p.text} likesCount={p.likesCount} />
   );
 
@@ -12,7 +12,12 @@ function MyPosts(props) {
   function addPost() {
     let text = newPostElement.current.value;
     newPostElement.current.value = '';
-    alert(text);
+    props.addPost(text);
+  }
+
+  function onPostChange() {
+    let text = newPostElement.current.value;
+    props.updateNewPostText(text);
   }
 
   return (
@@ -23,7 +28,9 @@ function MyPosts(props) {
       <div>New post:</div>
       <div>
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea ref={newPostElement} 
+          onChange={onPostChange} 
+          value={props.profilePage.newPostText} />
         </div>
         <div>
           <button onClick={addPost}>Add post</button>
