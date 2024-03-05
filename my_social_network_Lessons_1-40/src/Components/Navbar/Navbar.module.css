@@ -1,0 +1,18 @@
+.nav {
+  grid-area: n;
+  grid-area: n;
+  background-color: cadetblue;
+  padding: 20px;
+  font-size: larger;
+  
+}
+
+.pending {
+  text-decoration: none;
+  color: white;
+  margin-left: 20px;
+}
+
+.active {
+  color: gold;
+}

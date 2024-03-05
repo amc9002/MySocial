@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  grid-area: h;
+  background-color: aquamarine;
+}
+
+.header img {
+  box-sizing: border-box;
+  margin: 5px;
+  width: 70px;
+}
+
+.title {
+  align-items: center;
+  font-style: oblique;
+  font-size: 300%;
+  display: flex;
+  padding-left: 300px;
+  color: cadetblue;
+}

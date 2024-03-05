@@ -1,0 +1,24 @@
+.dialog {
+    display: flex;
+    height: 50px;
+    padding: 10px;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 20px;
+    border: solid rgb(151, 14, 189) 2px;
+    align-items: flex-end;
+}
+
+.dialog img {
+    width: 40px;
+    border-radius: 20px;
+}
+
+a.dialog.active {
+    color: red;
+}
+
+span {
+    font-size: 20px;
+    margin-left: 10px;
+}

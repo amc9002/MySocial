@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post'
-import { addPostAC, updateNewPostTextAC } from '../../../Redux/profile-reducer';
+import { addPostAC, updateNewPostTextAC } from '../../../Redux/store';
 
 function MyPosts(props) {
   let postsDataToJsx = props.profilePage.postsData.map(p =>

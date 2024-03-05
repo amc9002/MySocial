@@ -1,0 +1,16 @@
+.item {
+  font-size: large;
+  color: green;
+}
+
+.item img {
+  border-radius: 50%;
+}
+
+img {
+  width: 50px;
+}
+
+.likeDiv {
+  font-size: small;
+}

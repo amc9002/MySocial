@@ -1,6 +1,7 @@
-import dialogsReducer from "./dialogs-reducer";
-import profileReducer from "./profile-reducer";
-import sidebarReducer from "./sidebar-reducer";
+const ADD_POST = 'ADD_POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
+const ADD_MESSAGE = 'ADD_MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
 
 let store = {
     _state: {
@@ -66,25 +67,61 @@ let store = {
             ],
             newMessageText: ''
         },
+
+
     },
     _callSubscriber() { },
 
     getState() { return this._state; },
     subscribe(observer) { // observer pattern
-        this._callSubscriber = observer; // observer = rerenderEntireTree
+        this._callSubscriber = observer; // rerenderEntireTree
     },
     dispatch(action) { // object action requires at least a property { type: '' } (f.ex.  type: 'ADD_POST')
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
-        this._state.profilePage = profileReducer(this._state.profilePage, action);
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
-
-        this._callSubscriber(this._state);
+        switch (action.type) {
+            case ADD_POST: {
+                let nextId = this._state.profilePage.postsData[this._state.profilePage.postsData.length - 1].id + 1;
+                let newPost = {
+                    id: nextId,
+                    post: this._state.profilePage.newPostText,
+                    likesCount: 0
+                }
+                this._state.profilePage.postsData.push(newPost);
+                this._state.profilePage.newPostText = '';
+                this._callSubscriber(this._state);
+                break;
+            }
+            case UPDATE_NEW_POST_TEXT: {
+                this._state.profilePage.newPostText = action.newText;
+                this._callSubscriber(this._state);
+                break;
+            }
+            case ADD_MESSAGE: {
+                let nextId = this._state.dialogsPage.messagesData[this._state.dialogsPage.messagesData.length - 1].id + 1;
+                let newMessage = {
+                    id: nextId,
+                    message: this._state.dialogsPage.newMessageText,
+                }
+                this._state.dialogsPage.messagesData.push(newMessage);
+                this._state.dialogsPage.newMessageText = '';
+                this._callSubscriber(this._state);
+                break;
+            }
+            case UPDATE_NEW_MESSAGE_TEXT: {
+                this._state.dialogsPage.newMessageText = action.newText;
+                this._callSubscriber(this._state);
+                break;
+            }
+            default: { alert('No such an action type!'); }
+        }
     }
 }
-
 
 export default store;
 window.store = store;
 
+                    // Action Creators
 
-
+export const addPostAC = () => ({ type: ADD_POST })
+export const updateNewPostTextAC = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
+export const addMessageAC = () => ({ type: ADD_MESSAGE })
+export const updateNewMessageTextAC = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: text })

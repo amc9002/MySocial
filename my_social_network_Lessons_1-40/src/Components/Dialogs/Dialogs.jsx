@@ -2,7 +2,7 @@ import s from "./Dialogs.module.css"
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import React from "react";
-import { addMessageAC, updateNewMessageTextAC } from "../../Redux/dialogs-reducer";
+import { addMessageAC, updateNewMessageTextAC } from "../../Redux/store";
 
 function Dialogs(props) {
     const dialogsDataToJsx = props.dialogsPage.dialogsData.map(d =>
