@@ -2,7 +2,6 @@ import s from "./Dialogs.module.css"
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import React from "react";
-import { addMessageAC, updateNewMessageTextAC } from "../../Redux/dialogs-reducer";
 
 function Dialogs(props) {
     const dialogsDataToJsx = props.dialogsPage.dialogsData.map(d =>
@@ -12,11 +11,11 @@ function Dialogs(props) {
         <Message key={m.id} message={m.message} />
     );
 
-    const addNewMessage = () => { props.dispatch( addMessageAC() ); }
+    const addNewMessage = () => { props.addNewMessage(); }
         
     const onMessageChange = (e) => {
         let text = e.target.value;
-        props.dispatch( updateNewMessageTextAC(text) );
+        props.onMessageChange(text);
     }
 
     return (
@@ -42,7 +41,6 @@ function Dialogs(props) {
                     {messagesDataToJsx}
                 </div>
             </div>
-
         </div>
     );
 }

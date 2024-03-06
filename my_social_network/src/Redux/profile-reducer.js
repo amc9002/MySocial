@@ -1,7 +1,17 @@
 const ADD_POST = 'ADD_POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 
-function profileReducer(state, action) { // state = store.state.profilePage
+let initialState = {
+    postsData: [
+        { id: 1, post: "Hello!", likesCount: 10 },
+        { id: 2, post: "Post 1", likesCount: 20 },
+        { id: 3, post: "Post 2", likesCount: 30 },
+        { id: 4, post: "Post 3", likesCount: 40 }
+    ],
+    newPostText: ''
+}
+
+function profileReducer(state = initialState, action) { // state = store.profilePage
     switch (action.type) {
         case ADD_POST: {
             let nextId = state.postsData[state.postsData.length - 1].id + 1;
@@ -10,18 +20,20 @@ function profileReducer(state, action) { // state = store.state.profilePage
                 post: state.newPostText,
                 likesCount: 0
             }
-            state.postsData.push(newPost);
-            state.newPostText = '';
-            break;
+            return {
+                ...state,
+                postsData: [...state.postsData, newPost],
+                newPostText: ''
+            }
         }
         case UPDATE_NEW_POST_TEXT: {
-            state.newPostText = action.newText;
-            break;
+            return {
+                ...state,
+                newPostText: action.newText
+            };
         }
-        default: {}
+        default: return state;
     }
-
-    return state;
 }
 
 export default profileReducer;
