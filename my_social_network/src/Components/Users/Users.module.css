@@ -1,4 +1,12 @@
 .userPic {
     height: 100px;
-    width: 80px;
+    width: 100px;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.pageNumbers {
+    width: 5%;
 }

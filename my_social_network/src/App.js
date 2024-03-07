@@ -6,13 +6,12 @@ import Profile from './Components/Profile/Profile';
 import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Friends from './Components/Friends/Friends';
-import Users from './Components/Users/Users';
 import Settings from './Components/Settings/Settings';
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
 import { Provider } from 'react-redux';
 import store from './Redux/redux-store';
 import NavbarContainer from './Components/Navbar/NavbarContainer';
-import { UsersContainer } from './Components/Users/UsersContainer';
+import UsersContainer from './Components/Users/UsersContainer';
 
 function App(props) {
   return (

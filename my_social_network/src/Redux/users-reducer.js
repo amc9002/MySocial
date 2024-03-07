@@ -3,54 +3,14 @@ const ADD_USER = 'ADD_USER';
 const UPDATE_NEW_USER_TEXT = 'UPDATE_NEW_USER_TEXT';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 
 let initialState = {
-    users: [
-        {
-            id: 1,
-            userPic: 'https://karotkizmest.by/images/kalinouski.jpg',
-            fullName: "Fullname 1",
-            status: 'Status 1',
-            location: {
-                city: 'City 1',
-                country: 'Country 1'
-            },
-            followed: false
-        },
-        {
-            id: 2,
-            userPic: 'https://karotkizmest.by/images/kalinouski.jpg',
-            fullName: "Fullname 2",
-            status: 'Status 2',
-            location: {
-                city: 'City 2',
-                country: 'Country 2'
-            },
-            followed: true
-        },
-        {
-            id: 3,
-            userPic: 'https://karotkizmest.by/images/kalinouski.jpg',
-            fullName: "Fullname 3",
-            status: 'Status 3',
-            location: {
-                city: 'City 3',
-                country: 'Country 3'
-            },
-            followed: true
-        },
-        {
-            id: 4,
-            userPic: 'https://karotkizmest.by/images/kalinouski.jpg',
-            fullName: "Fullname 4",
-            status: 'Status 4',
-            location: {
-                city: 'City 4',
-                country: 'Country 4'
-            },
-            followed: true
-        }
-    ],
+    users: [ ],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
     newUserText: ''
 }
 
@@ -59,7 +19,7 @@ function usersReducer(state = initialState, action) { // state = store.usersPage
     const followUnfollow = (userId, isFollowed) => {
         let stateCopy = {
             ...state,
-            usersData: state.users.map(u => {
+            users: state.users.map(u => {
                 if (u.id === userId)                
                     return { ...u, followed: isFollowed };
                 return u;
@@ -83,12 +43,18 @@ function usersReducer(state = initialState, action) { // state = store.usersPage
         //     };
         // }
         case SET_USERS:
-            return { ...state, usersData: [...state.users, ...action.users] };
+            return { ...state, users: action.users };
         case FOLLOW: {
             return followUnfollow(action.userId, true);
         }
         case UNFOLLOW: {
             return followUnfollow(action.userId, false);
+        }
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage};
+        }
+        case SET_TOTAL_COUNT: {
+            return {...state, totalUsersCount: action.totalUsersCount}
         }
         default: return state;
     }
@@ -99,6 +65,8 @@ export default usersReducer;
 export const setUsersAC = (users) => ({ type: SET_USERS, users })
 export const followAC = (userId) => ({ type: FOLLOW, userId })
 export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId })
+export const setCurrentPageAC = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage})
+export const setTotalUsersCountAC = (totalUsersCount) => ({ type: SET_TOTAL_COUNT, totalUsersCount })
 
 // export const addUserAC = () => ({ type: ADD_USER })
 // export const updateNewUserTextAC = (text) => ({ type: UPDATE_NEW_USER_TEXT, newText: text })
