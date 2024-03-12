@@ -1,8 +1,6 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Header from "./Components/Header/Header";
-import Profile from './Components/Profile/Profile';
 import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Friends from './Components/Friends/Friends';
@@ -12,17 +10,19 @@ import { Provider } from 'react-redux';
 import store from './Redux/redux-store';
 import NavbarContainer from './Components/Navbar/NavbarContainer';
 import UsersContainer from './Components/Users/UsersContainer';
+import ProfileContainer from './Components/Profile/ProfileContainer';
+import HeaderContainer from './Components/Header/HeaderContainer';
 
 function App(props) {
   return (
     <BrowserRouter>
       <Provider store={store}>
         <div className="app-wrapper">
-          <Header />
+          <HeaderContainer />
           <NavbarContainer />
           <div className='app-wrapper-content'>
             <Routes>
-              <Route path='/profile' element={<Profile />} />
+              <Route path='/profile/:userId?' element={<ProfileContainer />} />
               <Route path='/dialogs/*' element={<DialogsContainer />} />
               <Route path='/news' element={<News />} />
               <Route path='/music' element={<Music />} />
