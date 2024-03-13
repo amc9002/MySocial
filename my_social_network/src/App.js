@@ -12,6 +12,7 @@ import NavbarContainer from './Components/Navbar/NavbarContainer';
 import UsersContainer from './Components/Users/UsersContainer';
 import ProfileContainer from './Components/Profile/ProfileContainer';
 import HeaderContainer from './Components/Header/HeaderContainer';
+import Login from './Components/Login/Login';
 
 function App(props) {
   return (
@@ -29,6 +30,7 @@ function App(props) {
               <Route path='/friends' element={<Friends />} />
               <Route path='/users' element={<UsersContainer />} />
               <Route path='/settings' element={<Settings />} />
+              <Route path='/login' element={<Login />} />
             </Routes>
           </div>
         </div>
