@@ -26,11 +26,14 @@ const LoginReduxForm = reduxForm({
     fields: ['login', 'password', 'rememberMe']
     })(LoginForm);
 
-function Login(props) {
+function Login() {
+    const onSubmit = (formData) => {
+        console.log(formData);
+    }
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm />
+            <LoginReduxForm onSubmit={onSubmit} />
         </div>
     )
 }
