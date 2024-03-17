@@ -2,17 +2,11 @@ import s from "./Dialogs.module.css"
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+
 
 function Dialogs(props) {
-    const navigate = useNavigate();
-    if(!props.isAuth)  {
-        navigate('/login');
-    return;
-}
-
     const dialogsDataToJsx = props.dialogsPage.dialogsData.map(d =>
-        <Dialog key={d.id} id={d.id} name={d.name} ava={d.ava} isActive={d.isActive}/>
+        <Dialog key={d.id} id={d.id} name={d.name} ava={d.ava} isActive={d.isActive} />
     );
     const messagesDataToJsx = props.dialogsPage.messagesData.map(m =>
         <Message key={m.id} message={m.message} />
@@ -37,8 +31,8 @@ function Dialogs(props) {
                 <div>
                     <div>
                         <textarea placeholder='Enter message here'
-                        onChange={onMessageChange}
-                        value={props.dialogsPage.newMessageText}></textarea>
+                            onChange={onMessageChange}
+                            value={props.dialogsPage.newMessageText}></textarea>
                     </div>
                     <div>
                         <button onClick={addNewMessage}>Add message</button>
