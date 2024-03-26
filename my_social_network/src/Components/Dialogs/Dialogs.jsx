@@ -2,7 +2,30 @@ import s from "./Dialogs.module.css"
 import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import React from "react";
+import { Field, Form } from "react-final-form";
 
+
+const Dialogsform = (props) => {
+    return (
+        <Form fields={["newMessage"]} onSubmit={values => {
+            props.onSubmit(values.newMessage);
+        }}>
+            {({ handleSubmit }) => (
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <Field name={"newMessage"}
+                            component={"input"}
+                            type={"text"}
+                            placeholder={"Enter message here"} />
+                    </div>
+                    <div>
+                        <button>Add message</button>
+                    </div>
+                </form>
+            )}
+        </Form>
+    )    
+}
 
 function Dialogs(props) {
     const dialogsDataToJsx = props.dialogsPage.dialogsData.map(d =>
@@ -12,13 +35,7 @@ function Dialogs(props) {
         <Message key={m.id} message={m.message} />
     );
 
-    const addNewMessage = () => { props.addMessage(); }
-
-    const onMessageChange = (e) => {
-        let text = e.target.value;
-        props.updateNewMessageText(text);
-    }
-
+    const addNewMessage = (newMessage) => { props.addMessage(newMessage); }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -29,14 +46,7 @@ function Dialogs(props) {
             </div>
             <div>
                 <div>
-                    <div>
-                        <textarea placeholder='Enter message here'
-                            onChange={onMessageChange}
-                            value={props.dialogsPage.newMessageText}></textarea>
-                    </div>
-                    <div>
-                        <button onClick={addNewMessage}>Add message</button>
-                    </div>
+                    <Dialogsform onSubmit={addNewMessage} />
                 </div>
                 <div className={s.messages}>
                     {messagesDataToJsx}

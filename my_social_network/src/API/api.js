@@ -12,6 +12,11 @@ export const authAPI = {
     async me() {
         const response = await instance.get(`auth/me`);
         return response.data;
+    },
+
+    async login(email, password, rememberMe, captcha) {
+        const response = await instance.post(`auth/login`, {email, password, rememberMe, captcha});
+        return response.data;
     }
 }
 

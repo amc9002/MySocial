@@ -1,5 +1,4 @@
 const ADD_MESSAGE = 'ADD_MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
 
 let initialState = {
     dialogsData: [
@@ -39,7 +38,6 @@ let initialState = {
         { id: 2, message: "message 2" },
         { id: 3, message: 'message 3' }
     ],
-    newMessageText: ''
 }
 
 function dialogsReducer(state = initialState, action) { // state = store.dialogsPage    
@@ -48,19 +46,12 @@ function dialogsReducer(state = initialState, action) { // state = store.dialogs
             let nextId = state.messagesData[state.messagesData.length - 1].id + 1;
             let newMessage = {
                 id: nextId,
-                message: state.newMessageText,
+                message: action.newMessage,
             }
             return {
                 ...state, 
                 messagesData: [...state.messagesData, newMessage],
-                newMessageText: ''
             }
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                newMessageText: action.newText
-            };
         }
         default: return state;
     }
@@ -68,5 +59,4 @@ function dialogsReducer(state = initialState, action) { // state = store.dialogs
 
 export default dialogsReducer;
 
-export const addMessage = () => ({ type: ADD_MESSAGE })
-export const updateNewMessageText = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: text })
+export const addMessage = (newMessage) => ({ type: ADD_MESSAGE, newMessage });
