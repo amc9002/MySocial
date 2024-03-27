@@ -2,14 +2,25 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post'
 import { Field, Form } from 'react-final-form';
-import { maxLengthCreator, required } from '../../../Utils/validators';
+import { maxLength, required } from '../../../Utils/validators';
 
 const validator = (value) => {
-  console.log("Validator is called");
-  if (value.length === undefined || value.length === null || value.length <= 0)
-    return undefined;
-  required(value);
-  maxLengthCreator(10)(value.newPost);
+  console.log("Validator is called", value);
+  const errors = {};
+  { //newPost field validation
+    const req = required(value.newPost);
+    console.log("'Recuired' returned: ", req);
+    if (req) {
+      errors.newPost = req;
+    }
+    else {
+      const len = maxLength(10)(value.newPost);
+      if (len) errors.newPost = len;
+    }
+  }
+
+  console.log("Validator resilt:", errors.newPost);
+  return errors;
 }
 
 const MyPostsForm = (props) => {
@@ -18,17 +29,26 @@ const MyPostsForm = (props) => {
       props.onSubmit(values.newPost)
     }}
       validate={values => {
-        validator(values)
+        const errors = validator(values);
       }}
     >
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           <div>
-            <Field name={"newPost"}
-              component={"input"}
-              type={"text"}
-              placeholder={"Enter post here"}
-            />
+            <Field name={"newPost"}>
+              {({ input, meta }) => (
+                <div>
+                  <input
+                    {...input}
+                    type={"text"}
+                    placeholder={"Enter post here"}
+                  />
+                  <div className='errorMsg'>
+                    {meta.error && meta.touched && <div>{meta.error}</div>}
+                  </div>
+                </div>
+              )}
+            </Field>
           </div>
           <div><button type={"submit"}>Add post</button></div>
         </form>
