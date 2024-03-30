@@ -8,7 +8,7 @@ import { Textarea } from '../../Common/FieldControls/FieldControls';
 const validator = (value) => {
   console.log("Validator is called", value);
   const errors = {};
-  { 
+  {
     const req = required(value.newPost);
     if (req) {
       errors.newPost = req;
