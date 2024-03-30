@@ -3,13 +3,13 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post'
 import { Field, Form } from 'react-final-form';
 import { maxLength, required } from '../../../Utils/validators';
+import { Textarea } from '../../Common/FieldControls/FieldControls';
 
 const validator = (value) => {
   console.log("Validator is called", value);
   const errors = {};
-  { //newPost field validation
+  { 
     const req = required(value.newPost);
-    console.log("'Recuired' returned: ", req);
     if (req) {
       errors.newPost = req;
     }
@@ -28,28 +28,11 @@ const MyPostsForm = (props) => {
     <Form fields={["newPost"]} onSubmit={values => {
       props.onSubmit(values.newPost)
     }}
-      validate={values => {
-        const errors = validator(values);
-      }}
+      validate={validator}
     >
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <div>
-            <Field name={"newPost"}>
-              {({ input, meta }) => (
-                <div>
-                  <input
-                    {...input}
-                    type={"text"}
-                    placeholder={"Enter post here"}
-                  />
-                  <div className='errorMsg'>
-                    {meta.error && meta.touched && <div>{meta.error}</div>}
-                  </div>
-                </div>
-              )}
-            </Field>
-          </div>
+          <Textarea name={"newPost"} placeholder={"Enter post here"} />
           <div><button type={"submit"}>Add post</button></div>
         </form>
       )}

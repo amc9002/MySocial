@@ -5,3 +5,11 @@
 .posts {
   margin-top: 10px;
 }
+
+.errorMsg {
+  color:red;
+}
+
+textarea.error {
+  border-color: red;
+}

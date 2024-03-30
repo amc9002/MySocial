@@ -1,6 +1,6 @@
 import s from './ProfileInfo.module.css'
 import coverPic from '../../../Assets/Images/cover_pic.jpg'
-import Preloader from '../../Preloader/preload';
+import Preloader from '../../Common/Preloader/preload';
 import yesPic from '../../../Assets/Images/yesPic.jpeg';
 import noPic from '../../../Assets/Images/noPic.jpeg';
 import ProfileStatus from './ProfileStatus'
