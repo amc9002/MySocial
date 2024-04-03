@@ -1,31 +1,73 @@
 import React from "react";
-import { Form, Field } from 'react-final-form'
+import { maxLength, required } from "../../Utils/validators";
+import { Formik } from "formik";
+import s from "./Login.module.css"
 
+const validator = (value) => {
+    console.log("Validator is called", value);
+
+    const errors = {};
+
+    let req = required(value.login);
+    if (req)  errors.login = req;
+    else {
+        let len = maxLength(10)(value.login);
+        if (len) errors.login = len;
+    }
+
+    req = required(value.password)
+    if (req)  errors.password = req;
+
+    console.log("Validator's result :", errors);
+    return errors;
+}
 
 const LoginForm = (props) => {
     return (
-        <Form
-            fields={['login', 'password', 'rememberMe']}
-            onSubmit={values => {
-                console.log(values);
-                props.onSubmit(values);
-            }}
-        >
-            {({ handleSubmit }) => (
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <Field name={"login"} component={"input"} type={"text"} placeholder={"Login"} />
-                    </div>
-                    <div>
-                        <Field name={"password"} component={"input"} type={"text"} placeholder={"Password"} />
-                    </div>
-                    <div>
-                        <Field name={"rememberMe"} component={"input"} type={"checkbox"} /> remember me
-                    </div>
-                    <div><button type={"submit"}>Log in</button></div>
-                </form>
-            )}
-        </Form>
+        <div>
+            <Formik
+                initialValues={{ login: '', password: '', rememberMe: false }}
+                validate={validator}
+                onSubmit={(values, { setSubmitting }) => {
+                    setSubmitting(props.onSubmit(values));
+                }}
+            >
+                {({ values, errors, touched, handleSubmit, handleChange }) => (
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <input className={errors.login && touched.login ? s.error : undefined}
+                                name="login"
+                                type="text"
+                                placeholder={"Login"}
+                                onChange={handleChange}
+                                value={values.login}
+                            />
+
+                            {errors.login && touched.login && <span className={s.errorMsg}>{errors.login}</span>}
+                        </div>
+                        <div>
+                            <input className={errors.password && touched.password ? s.error : undefined}
+                                name="password"
+                                type="text"
+                                placeholder={"Password"}
+                                onChange={handleChange}
+                                value={values.password}
+                            />
+                            {errors.password && touched.password && <span className={s.errorMsg}>{errors.password}</span>}
+                        </div>
+                        <div>
+                            <input
+                                name="rememberMe"
+                                type="checkbox"
+                                onChange={handleChange}
+                                value={values.rememberMe}
+                            />
+                        </div>
+                        <div><button type={"submit"}>Login</button></div>
+                    </form>
+                )}
+            </Formik>
+        </div>
     )
 }
 

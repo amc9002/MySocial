@@ -19,3 +19,12 @@
     display:flex;
     justify-content: center;
 }
+
+.errorMsg {
+    font-size: small;
+    color:red;
+  }
+  
+  textarea.error {
+    border-color: red;
+  }

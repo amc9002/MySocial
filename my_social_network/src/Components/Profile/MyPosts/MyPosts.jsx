@@ -1,9 +1,8 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post'
-import { Field, Form } from 'react-final-form';
 import { maxLength, required } from '../../../Utils/validators';
-import { Textarea } from '../../Common/FieldControls/FieldControls';
+import { Formik } from 'formik';
 
 const validator = (value) => {
   console.log("Validator is called", value);
@@ -25,18 +24,31 @@ const validator = (value) => {
 
 const MyPostsForm = (props) => {
   return (
-    <Form fields={["newPost"]} onSubmit={values => {
-      props.onSubmit(values.newPost)
-    }}
-      validate={validator}
-    >
-      {({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Textarea name={"newPost"} placeholder={"Enter post here"} />
-          <div><button type={"submit"}>Add post</button></div>
-        </form>
-      )}
-    </Form>
+    <div>
+      <Formik
+        initialValues={{ newPost: '' }}
+        validate={validator}
+        onSubmit={(values, { setSubmitting }) => {
+          setSubmitting(props.onSubmit(values.newPost));
+        }}
+      >
+        {({ values, errors, touched, handleSubmit, handleChange }) => (
+          <form onSubmit={handleSubmit}>
+            <textarea className={errors.newPost && touched.newPost ? s.error : undefined}
+              name="newPost"
+              type="text"
+              placeholder={"Enter post here"}
+              onChange={handleChange}
+              value={values.newPost}
+            />
+            <div className={s.errorMsg}>
+              {errors.newPost && touched.newPost && <div>{errors.newPost}</div>}
+            </div>
+            <div><button type={"submit"}>Add post</button></div>
+          </form>
+        )}
+      </Formik>
+    </div>
   )
 }
 
