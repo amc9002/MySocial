@@ -10,3 +10,12 @@ export const  maxLength = (maxLength) => (text) => {
 
     return undefined;
 }
+
+export const ComposeValidators = (validators) => (value) => {
+    let error = undefined;
+    for(let i = 0; i < validators.length; i++) {
+        error = validators[i](value);
+        if(error) break;
+    }
+    return error;
+}

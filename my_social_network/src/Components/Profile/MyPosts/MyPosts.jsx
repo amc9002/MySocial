@@ -1,24 +1,12 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post'
-import { maxLength, required } from '../../../Utils/validators';
+import { ComposeValidators, maxLength, required } from '../../../Utils/validators';
 import { Formik } from 'formik';
 
 const validator = (value) => {
-  console.log("Validator is called", value);
   const errors = {};
-  {
-    const req = required(value.newPost);
-    if (req) {
-      errors.newPost = req;
-    }
-    else {
-      const len = maxLength(10)(value.newPost);
-      if (len) errors.newPost = len;
-    }
-  }
-
-  console.log("Validator resilt:", errors.newPost);
+  errors.newPost = ComposeValidators([required, maxLength(10)])(value.newPost);
   return errors;
 }
 

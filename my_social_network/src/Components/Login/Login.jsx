@@ -1,24 +1,12 @@
 import React from "react";
-import { maxLength, required } from "../../Utils/validators";
+import { ComposeValidators, maxLength, required } from "../../Utils/validators";
 import { Formik } from "formik";
 import s from "./Login.module.css"
 
 const validator = (value) => {
-    console.log("Validator is called", value);
-
     const errors = {};
-
-    let req = required(value.login);
-    if (req)  errors.login = req;
-    else {
-        let len = maxLength(10)(value.login);
-        if (len) errors.login = len;
-    }
-
-    req = required(value.password)
-    if (req)  errors.password = req;
-
-    console.log("Validator's result :", errors);
+    errors.login = ComposeValidators([required, maxLength(10)])(value.login);
+    errors.password = ComposeValidators([required])(value.password);
     return errors;
 }
 

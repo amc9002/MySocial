@@ -3,19 +3,13 @@ import Dialog from "./Dialog/Dialog";
 import Message from "./Message/Message";
 import React from "react";
 import { Formik } from "formik";
-import { maxLength } from "../../Utils/validators";
+import { ComposeValidators, maxLength } from "../../Utils/validators";
 
 const validator = (value) => {
-    console.log("Validator is called", value);
     const errors = {};
-    const len = maxLength(50)(value.newMessage);
-    if (len) errors.newMessage = len;
-
-    console.log("Validator resilt:", errors.newMessage);
+    errors.newMessage = ComposeValidators([maxLength(10)])(value.newMessage);
     return errors;
 }
-
-
 
 const Dialogsform = (props) => {
     return (
